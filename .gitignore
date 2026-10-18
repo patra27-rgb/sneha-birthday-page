@@ -12,8 +12,6 @@ dist
 dist-ssr
 *.local
 /sneha*.jpeg
-/public/sneha*.jpeg
-/public/sneha.png
 
 # Editor directories and files
 .vscode/*

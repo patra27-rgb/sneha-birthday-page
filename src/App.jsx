@@ -25,10 +25,8 @@ function App() {
   const [letterOpen, setLetterOpen] = useState(false)
   const [celebration, setCelebration] = useState(null)
   const [darkMode, setDarkMode] = useState(false)
-  const [heroPhotoMissing, setHeroPhotoMissing] = useState(!import.meta.env.DEV)
-  const [missingGalleryPhotos, setMissingGalleryPhotos] = useState(
-    () => import.meta.env.DEV ? new Set() : new Set(galleryPhotos),
-  )
+  const [heroPhotoMissing, setHeroPhotoMissing] = useState(false)
+  const [missingGalleryPhotos, setMissingGalleryPhotos] = useState(() => new Set())
   const burstId = useRef(0)
 
   function celebrate(event) {

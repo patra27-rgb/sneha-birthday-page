@@ -14,12 +14,10 @@ npm install
 npm run dev
 ```
 
-## Personal photos
+## Photos
 
-Personal photos are intentionally not included in this public repository. To
-preview the page with your own photos, add these files to `public/` locally:
+The public site and repository include the birthday photos. They are publicly
+accessible to anyone who visits the page or repository.
 
-- `sneha.png` for the hero portrait
-- `sneha2.jpeg` through `sneha12.jpeg` for the gallery and page background
-
-These image files are excluded from Git so they won't be uploaded accidentally.
+The hero portrait is `public/sneha.png`; the gallery uses
+`public/sneha2.jpeg` through `public/sneha12.jpeg`.
