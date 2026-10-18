@@ -44,7 +44,11 @@ function App() {
   }
 
   return (
-    <main className="page-shell" data-theme={darkMode ? 'dark' : 'light'}>
+    <main
+      className="page-shell"
+      data-theme={darkMode ? 'dark' : 'light'}
+      style={{ '--page-background-image': `url("${photoBaseUrl}sneha12.jpeg")` }}
+    >
       {celebration && (
         <div className="balloon-burst" aria-hidden="true">
           {balloons.map((index) => {
