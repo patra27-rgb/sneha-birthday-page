@@ -25,8 +25,10 @@ function App() {
   const [letterOpen, setLetterOpen] = useState(false)
   const [celebration, setCelebration] = useState(null)
   const [darkMode, setDarkMode] = useState(false)
-  const [heroPhotoMissing, setHeroPhotoMissing] = useState(false)
-  const [missingGalleryPhotos, setMissingGalleryPhotos] = useState(() => new Set())
+  const [heroPhotoMissing, setHeroPhotoMissing] = useState(!import.meta.env.DEV)
+  const [missingGalleryPhotos, setMissingGalleryPhotos] = useState(
+    () => import.meta.env.DEV ? new Set() : new Set(galleryPhotos),
+  )
   const burstId = useRef(0)
 
   function celebrate(event) {
@@ -151,13 +153,14 @@ function App() {
             <span>WITH LOVE</span>
           </span>
           <span className="hero-placeholder" aria-hidden="true">♡</span>
-          <img
-            className="hero-photo"
-            src={`${photoBaseUrl}sneha.png`}
-            alt="Sneha"
-            onError={() => setHeroPhotoMissing(true)}
-            hidden={heroPhotoMissing}
-          />
+          {!heroPhotoMissing && (
+            <img
+              className="hero-photo"
+              src={`${photoBaseUrl}sneha.png`}
+              alt="Sneha"
+              onError={() => setHeroPhotoMissing(true)}
+            />
+          )}
           <div className="art-caption">a day as sweet as you</div>
           <span className="cake-side-note">one more wish ✷</span>
         </div>
