@@ -19,11 +19,14 @@ const galleryPhotos = Array.from({ length: 11 }, (_, index) => index + 2)
 const fireworks = Array.from({ length: 3 }, (_, index) => index)
 const fireworkSparks = Array.from({ length: 12 }, (_, index) => index)
 const fireworkColors = ['#ff6680', '#ffd94a', '#57b9ee']
+const photoBaseUrl = import.meta.env.BASE_URL
 
 function App() {
   const [letterOpen, setLetterOpen] = useState(false)
   const [celebration, setCelebration] = useState(null)
   const [darkMode, setDarkMode] = useState(false)
+  const [heroPhotoMissing, setHeroPhotoMissing] = useState(false)
+  const [missingGalleryPhotos, setMissingGalleryPhotos] = useState(() => new Set())
   const burstId = useRef(0)
 
   function celebrate(event) {
@@ -138,7 +141,7 @@ function App() {
           <p className="little-love"><span>♥</span> made with so much love</p>
         </div>
 
-        <div className="hero-art">
+        <div className={`hero-art${heroPhotoMissing ? ' image-missing' : ''}`}>
           <span className="art-sparkle sparkle-top" aria-hidden="true">✳</span>
           <span className="art-sparkle sparkle-right" aria-hidden="true">✦</span>
           <span className="art-sparkle sparkle-left" aria-hidden="true">✧</span>
@@ -147,7 +150,14 @@ function App() {
             <strong>SNEHA</strong>
             <span>WITH LOVE</span>
           </span>
-          <img className="hero-photo" src="/sneha.png" alt="Sneha" />
+          <span className="hero-placeholder" aria-hidden="true">♡</span>
+          <img
+            className="hero-photo"
+            src={`${photoBaseUrl}sneha.png`}
+            alt="Sneha"
+            onError={() => setHeroPhotoMissing(true)}
+            hidden={heroPhotoMissing}
+          />
           <div className="art-caption">a day as sweet as you</div>
           <span className="cake-side-note">one more wish ✷</span>
         </div>
@@ -160,14 +170,24 @@ function App() {
         </div>
         <div className="gallery-grid">
           {galleryPhotos.map((number) => (
-            <img
-              className="gallery-photo"
+            <figure
+              className={`gallery-frame${missingGalleryPhotos.has(number) ? ' image-missing' : ''}`}
               key={number}
-              src={`/sneha${number}.jpeg`}
-              alt={`Sneha, photo ${number}`}
-              loading="lazy"
-              decoding="async"
-            />
+            >
+              <span className="gallery-placeholder" aria-hidden="true">♡</span>
+              {!missingGalleryPhotos.has(number) && (
+                <img
+                  className="gallery-photo"
+                  src={`${photoBaseUrl}sneha${number}.jpeg`}
+                  alt={`Sneha, photo ${number}`}
+                  loading="lazy"
+                  decoding="async"
+                  onError={() => {
+                    setMissingGalleryPhotos((current) => new Set(current).add(number))
+                  }}
+                />
+              )}
+            </figure>
           ))}
         </div>
       </section>

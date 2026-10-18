@@ -2,6 +2,11 @@
 
 A birthday page made with React and Vite.
 
+## Live site
+
+Visit the deployed site at
+<https://patra27-rgb.github.io/sneha-birthday-page/>.
+
 ## Run locally
 
 ```sh
